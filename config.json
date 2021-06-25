@@ -1,8 +1,0 @@
-{
-	"debugMode": false,
-	"redeemToken": "token",
-	"saveWorkingProxies": true,
-	"scrapeProxies": true,
-	"threads": 1000,
-	"webhookUrl": "URL"
-}

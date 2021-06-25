@@ -31,28 +31,16 @@
 
 ## Requirements
 
-* [Node.js](https://nodejs.org/en/)
-* [A Discord token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token)
+* [Node.js v14+](https://nodejs.org/en/) (optional if you download the compiled version)
+* [A Discord token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token) (optional)
 
 ## Setup
 
-* Clone or download this repository to your computer.
-* Copy your token in the `redeemToken` field in the `config.json` file (use notepad to open it), and edit the other config variables as you like.
+* Clone this repository to your computer or download a compiled release from the [release page](https://github.com/Tenclea/YANG/releases).
+* Edit the config variables as you like.
 * Paste fresh http(s)/socks proxies into `required/http-proxies.txt`/`required/socks-proxies.txt`.
-* Open up a command prompt in the downloaded folder and type `npm install` to install the requirements.
-* Start the generator by typing `node app.js`.
-* If any error pops out, make sure to fix it before using the generator.
-
-### Config file
-
-These are the "global/config variables" :
-
-* `debugMode` > Prints additional information to the console, like proxies connection errors. (true/false)
-* `redeemToken` > The token the nitro codes will be applied to. (String)
-* `saveWorkingProxies` > Whether to write or not the working proxies to `working_proxies.txt` (recommended). (true/false)
-* `scrapeProxies` > Whether to automatically or not download fresh proxies from online sources. (true/false)
-* `threads` > The number of attempts to run at the same time. (Number)
-* `webhookUrl` > A webhook url to be notified when a code was found. (String)
+* Open up a command prompt in the downloaded folder and type `npm install` to install the requirements (not required for the compiled version).
+* Start the generator by typing `node app.js`, or opening up the executable you downloaded !
 
 ## Disclaimer
 

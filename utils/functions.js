@@ -4,19 +4,6 @@ const chalk = require('chalk'),
 	needle = require('needle');
 
 module.exports = {
-	checkConfig: (conf) => {
-		const configData = {
-			debugMode: ['boolean'], redeemToken: ['string', 'boolean'], saveWorkingProxies: ['boolean'],
-			scrapeProxies: ['boolean'], threads: ['number'], webhookUrl: ['string'],
-		};
-
-		for (const k of Object.keys(configData)) {
-			if (conf[k] === undefined) logger.error(`The ${chalk.bold(k)} configuration variable is missing, please check the '${chalk.yellow('config.json')}' file.`);
-			else if (!configData[k].includes(typeof conf[k])) logger.error(`The ${chalk.bold(k)} configuration variable is misconfigured. It should be one of '${chalk.yellow(configData[k].join(', '))}'.`);
-		}
-		return module.exports.checkToken(conf.redeemToken);
-	},
-
 	checkToken: (token) => {
 		const headers = { 'Content-Type': 'application/json', 'Authorization': token, 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0' };
 		needle.get('https://discordapp.com/api/v9/users/@me', { response_timeout: 10000, headers: headers }, (err, res, body) => {
@@ -72,8 +59,9 @@ module.exports = {
 	},
 
 	redeemNitro: (code, config) => {
+		if (!config.auto_redeem.enabled) return;
 
-		needle.post(`https://discordapp.com/api/v9/entitlements/gift-codes/${code}/redeem`, '', { headers: { 'Authorization': config.redeemToken } }, (err, res, body) => {
+		needle.post(`https://discordapp.com/api/v9/entitlements/gift-codes/${code}/redeem`, '', { headers: { 'Authorization': config.auto_redeem.token } }, (err, res, body) => {
 			if (err || !body) {
 				console.log(err);
 				logger.info(chalk.red(`Failed to redeem a nitro gift code : ${code} > ${err}.`));
@@ -87,11 +75,11 @@ module.exports = {
 				return logger.warn(`${chalk.bold(code)} was an invalid gift code or had already been claimed.`);
 			}
 			else if (body.message === 'This gift has been redeemed already.') {
-				if (config.webhookUrl) { module.exports.sendWebhook(config.webhookUrl, `This gift code (${code}) has already been redeemed...`); }
+				if (config.webhook.enabled) { module.exports.sendWebhook(config.webhook.url, `This gift code (${code}) has already been redeemed...`); }
 				return logger.warn(`${code} has already been redeemed...`);
 			}
 			else {
-				if (config.webhookUrl) { module.exports.sendWebhook(config.webhookUrl, 'Successfully claimed a gift code !'); }
+				if (config.webhook.enabled) { module.exports.sendWebhook(config.webhook.url, 'Successfully claimed a gift code !'); }
 				return logger.info(chalk.green(`Successfully redeemed the nitro gift code : ${code} !`));
 			}
 

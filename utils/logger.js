@@ -1,8 +1,10 @@
-const { readFileSync } = require('fs');
-const winston = require('winston');
-const chalk = require('chalk');
+const
+	chalk = require('chalk'),
+	{ readFileSync } = require('fs'),
+	winston = require('winston'),
+	yaml = require('js-yaml');
 
-const debugMode = JSON.parse(readFileSync('./config.json')).debugMode;
+const debug_mode = yaml.load(readFileSync('./config.yml')).debug_mode;
 
 module.exports = winston.createLogger({
 	transports: [new winston.transports.Console()],
@@ -20,5 +22,5 @@ module.exports = winston.createLogger({
 		else if (log.level === 'debug') return time + chalk.blue(`[${log.level.toUpperCase()}]`) + message;
 		else return time + `[${log.level.toUpperCase()}]` + message;
 	}),
-	level: debugMode ? 'debug' : 'info',
+	level: debug_mode ? 'debug' : 'info',
 });

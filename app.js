@@ -3,9 +3,10 @@ const
 	logger = require('./utils/logger'),
 	ms = require('ms'),
 	needle = require('needle'),
-	{ checkConfig, checkForUpdates, redeemNitro, sendWebhook } = require('./utils/functions'),
+	{ checkToken, checkForUpdates, redeemNitro, sendWebhook } = require('./utils/functions'),
 	{ existsSync, readFileSync, watchFile, writeFileSync } = require('fs'),
-	ProxyAgent = require('proxy-agent');
+	ProxyAgent = require('proxy-agent'),
+	yaml = require('js-yaml');
 
 const stats = { downloaded_codes: [], threads: 0, startTime: 0, used_codes: [], version: require('./package.json').version, working: 0 };
 
@@ -19,16 +20,16 @@ _/ / _/ ___ |/ /|  / / /_/ /
        ${chalk.italic.gray(`v${stats.version} - by Tenclea`)}
 `));
 
-let config = JSON.parse(readFileSync('./config.json'));
-checkConfig(config);
-watchFile('./config.json', () => {
-	config = JSON.parse(readFileSync('./config.json'));
+let config = yaml.load(readFileSync('./config.yml'));
+watchFile('./config.yml', () => {
+	config = yaml.load(readFileSync('./config.yml'));
 
 	// Updates logger
-	logger.level = config.debugMode ? 'debug' : 'info';
-
+	logger.level = config.debug_mode ? 'debug' : 'info';
 	logger.info('Updated the config variables.              ');
-	return checkConfig(config);
+
+	if (config.auto_redeem.enabled) checkToken(config.auto_redeem.token);
+	return;
 });
 
 /* Load proxies, working proxies and removes duplicates */
@@ -44,10 +45,10 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 
 (async () => {
 	checkForUpdates();
-	if (config.scrapeProxies) proxies = [...new Set(proxies.concat(await require('./utils/proxy-scrapper')()))];
+	if (config.proxies.enable_scrapper) proxies = [...new Set((await require('./utils/proxy-scrapper')()).concat(proxies))];
 	if (!proxies[0]) { logger.error('Could not find any valid proxies. Please make sure to add some in the \'required\' folder.'); process.exit(); }
 
-	proxies = await require('./utils/proxy-checker')(proxies, config.threads);
+	if (config.proxies.enable_checker) proxies = await require('./utils/proxy-checker')(proxies, config.threads);
 	if (!proxies[0]) { logger.error('All of your proxies were filtered out by the proxy checker. Please add some fresh ones in the \'required\' folder.'); process.exit(); }
 
 	logger.info(`Loaded ${chalk.yellow(proxies.length)} proxies.              `);
@@ -102,7 +103,9 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 					// Try to redeem the code if possible
 					redeemNitro(code, config);
 
-					if (config.webhookUrl) { sendWebhook(config.webhookUrl, `(${res.statusCode}) Found a \`${body.subscription_plan.name}\` gift code in \`${ms(+new Date() - stats.startTime, { long: true })}\` : https://discord.gift/${code}.`); }
+					if (config.webhook.enabled && config.webhook.notifications.valid_code) {
+						sendWebhook(config.webhook.url, `(${res.statusCode}) Found a \`${body.subscription_plan.name}\` gift code in \`${ms(+new Date() - stats.startTime, { long: true })}\` : https://discord.gift/${code}.`);
+					}
 
 					// Write working code to file
 					let codes = existsSync('./validCodes.txt') ? readFileSync('./validCodes.txt', 'UTF-8') : '';
@@ -146,7 +149,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 
 	const working_proxies = [];
 	stats.startTime = +new Date();
-	sendWebhook(config.webhookUrl, 'Started **YANG**.');
+	if (config.webhook.enabled && config.webhook.notifications.boot) sendWebhook(config.webhook.url, 'Started **YANG**.');
 
 	const startThreads = (t) => {
 		for (let i = 0; i < t; i++) {
@@ -167,21 +170,21 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 			proxies = (readFileSync('./working_proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '');
 			if (!proxies[0]) {
 				logger.error('Ran out of proxies.');
-				if (config.webhookUrl) return sendWebhook(config.webhookUrl, 'Ran out of proxies.').then(setTimeout(() => { process.exit(); }, 2500));
+				if (config.webhook.enabled) return sendWebhook(config.webhook.url, 'Ran out of proxies.').then(setTimeout(() => { process.exit(); }, 2500));
 				else return process.exit();
 			}
-			config.saveWorkingProxies = false;
+			config.proxies.save_working = false;
 			return startThreads(config.threads > proxies.length ? proxies.length : config.threads);
 		}
 
 		/* Save working proxies */
-		if (config.saveWorkingProxies) { writeFileSync('./working_proxies.txt', working_proxies.sort(p => p.indexOf('socks')).join('\n')); }
-	}, 5000);
+		if (config.proxies.save_working) { writeFileSync('./working_proxies.txt', working_proxies.sort(p => p.indexOf('socks')).join('\n')); }
+	}, 10_000);
 
 	let addingProxies = false;
 	setInterval(async () => {
 		checkForUpdates(true);
-		if (addingProxies || !config.scrapeProxies) return;
+		if (addingProxies || !config.proxies.enable_scrapper) return;
 		else addingProxies = true;
 
 		logger.info('Downloading updated proxies.');
