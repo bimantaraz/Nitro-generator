@@ -14,6 +14,8 @@ module.exports = async () => {
 			'https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt',
 			'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt',
 			'https://raw.githubusercontent.com/proxiesmaster/Free-Proxy-List/main/proxies.txt',
+			'https://www.proxyscan.io/download?type=http',
+			'https://www.proxyscan.io/download?type=https',
 		],
 		socks: [
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=socks4',
@@ -23,6 +25,8 @@ module.exports = async () => {
 			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks4.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks5.txt',
+			'https://www.proxyscan.io/download?type=socks4',
+			'https://www.proxyscan.io/download?type=socks5',
 		],
 	};
 
