@@ -7,7 +7,7 @@
  
   <br>
   <b>The most efficient nitro generator and checker you'll ever find.</b><br>
-  Made with ❤ by <b>Tenclea</b>
+  Made with ❤ by <b><a href="https://github.com/tenclea">Tenclea</a></b>
   <br>
   If you liked this project, please consider <b>starring</b> it <3
 </p>
