@@ -4,27 +4,36 @@ const logger = require('./logger'),
 module.exports = async () => {
 	const proxySites = {
 		http: [
-			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=https',
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=http',
-			'https://raw.githubusercontent.com/chipsed/proxies/main/proxies.txt',
-			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
+			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=https',
+			'https://cufly.cf/t',
+			'https://openproxylist.xyz/http.txt',
+			'https://paste.wtf/paste.php?download&id=97',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt',
-			'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt',
-			'https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt',
+			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
+			'https://raw.githubusercontent.com/chipsed/proxies/main/proxies.txt',
 			'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt',
+			'https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt',
 			'https://raw.githubusercontent.com/proxiesmaster/Free-Proxy-List/main/proxies.txt',
+			'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt',
 			'https://www.proxyscan.io/download?type=http',
 			'https://www.proxyscan.io/download?type=https',
 		],
 		socks: [
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=socks4',
-			'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt',
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=socks5',
-			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt',
-			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt',
+			'https://cufly.cf/u',
+			'https://cufly.cf/v',
+			'https://openproxylist.xyz/socks4.txt',
+			'https://openproxylist.xyz/socks5.txt',
+			'https://paste.wtf/paste.php?download&id=96',
+			'https://paste.wtf/paste.php?download&id=98',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks4.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks5.txt',
+			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt',
+			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt',
+			'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt',
 			'https://www.proxyscan.io/download?type=socks4',
 			'https://www.proxyscan.io/download?type=socks5',
 		],
@@ -33,15 +42,20 @@ module.exports = async () => {
 	const types = Object.keys(proxySites);
 	const scrapped = types.map(async t => {
 		const r = proxySites[t].map(async s => {
-			const res = await needle('get', s, { response_timeout: 5000 }).catch(e => logger.error(`Could not scrape proxies from ${s} : ${e}`));
+			const res = await needle('get', s, { response_timeout: 10000, follow_max: 5 })
+				.catch(e => logger.error(`Could not scrape proxies from ${s} : ${e}`));
+
 			if (!res.body) return [];
-			return res.body.split(/\r?\n/)
+			return res.body.split(/\r|\n|<br>/)
 				.filter(p => p !== '')
 				.map(p => t + '://' + p);
 		});
 		return await Promise.all(r).catch(e => logger.error(e));
 	});
-	return await Promise.all(scrapped)
+
+	const proxies = await Promise.all(scrapped)
 		.then(values => values.reduce((a, b) => a.concat(b.reduce((c, d) => c.concat(d), [])), []))
 		.catch(e => logger.error(e));
+
+	return [...new Set(proxies)];
 };

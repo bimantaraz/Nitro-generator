@@ -1,6 +1,6 @@
 {
 	"name": "yang",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "**The most efficient nitro generator and checker you'll ever find.**  \r Made with ❤ by **Tenclea**.",
 	"main": "app.js",
 	"scripts": {
@@ -33,9 +33,9 @@
 			"utils/*.js"
 		],
 		"targets": [
-			"node14-linux-x64",
-			"node14-macos-x64",
-			"node14-win-x64"
+			"node16-linux-x64",
+			"node16-macos-x64",
+			"node16-win-x64"
 		],
 		"outputPath": "dist"
 	},
