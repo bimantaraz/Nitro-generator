@@ -33,7 +33,7 @@
 
 ## Requirements
 
-* [Node.js v14+](https://nodejs.org/en/) (optional if you download the compiled version)
+* [Node.js v16+](https://nodejs.org/en/) (optional if you download the compiled version)
 * [A Discord token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token) (optional)
 
 ## Setup
