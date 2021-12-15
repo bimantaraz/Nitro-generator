@@ -17,7 +17,7 @@ proxies:
   enable_scrapper: true
 
 # The amount of codes to check at the same time (the higher, the faster, but also consumes more ressources)
-threads: 1500
+threads: 250
 
 # Receive webhook messages on start and when a valid code is found
 webhook:
