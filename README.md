@@ -25,6 +25,7 @@
 ## Main features
 
 * **Very fast code generator and checker (2000 attempts/minute)**
+* Fully automated, can generate and check codes infinitely, no need to restart every hour
 * Proxy scrapper and checker
 * Auto nitro-redeem
 * Download fresh proxies while checking codes
