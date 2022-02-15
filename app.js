@@ -45,7 +45,14 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 
 (async () => {
 	checkForUpdates();
-	if (config.proxies.enable_scrapper) proxies = [...new Set((await require('./utils/proxy-scrapper')()).concat(proxies))];
+	if (config.proxies.enable_scrapper) {
+		logger.info('Downloading fresh proxies...');
+
+		const downloaded = await require('./utils/proxy-scrapper')();
+		proxies = [...new Set(proxies.concat(downloaded))];
+
+		logger.info(`Downloaded ${chalk.yellow(downloaded.length)} proxies.`);
+	}
 	if (!proxies[0]) { logger.error('Could not find any valid proxies. Please make sure to add some in the \'required\' folder.'); process.exit(); }
 
 	if (config.proxies.enable_checker) proxies = await require('./utils/proxy-checker')(proxies, config.threads);
