@@ -115,7 +115,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 
 					stats.working++;
 				}
-				else if (body.message === 'You are being rate limited.') {
+				else if (body.message === 'The resource is being rate limited.') {
 					// timeouts equal to 600000 are frozen. Most likely a ban from Discord's side.
 					const timeout = body.retry_after;
 					if (timeout != 600000) {
