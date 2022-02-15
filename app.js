@@ -137,6 +137,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 				else if (body.message === 'Unknown Gift Code') {
 					logger.warn(`${code} was an invalid gift code.              `);
 				}
+				else { console.log(body?.message + ' - please report this on GitHub.'); }
 				logStats();
 				return setTimeout(() => { checkCode(generateCode(), p); }, p === proxy ? (body.retry_after * 1000 || 1000) : 0);
 			});
