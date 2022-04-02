@@ -42,7 +42,7 @@ module.exports = async () => {
 	const types = Object.keys(proxySites);
 	const scrapped = types.map(async t => {
 		const r = proxySites[t].map(async s => {
-			const res = await needle('get', s, { response_timeout: 10000, follow_max: 5 })
+			const res = await needle('get', s, { response_timeout: 10000, follow_max: 5, rejectUnauthorized: false })
 				.catch(e => logger.error(`Could not scrape proxies from ${s} : ${e}`));
 
 			if (!res.body) return [];
