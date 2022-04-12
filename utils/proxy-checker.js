@@ -5,10 +5,8 @@ const
 	ms = require('ms'),
 	needle = require('needle'),
 	ProxyAgent = require('proxy-agent');
-// const socks = require('socks-proxy-agent');
 
 module.exports = async (proxies, threads, silent = false) => {
-	// threads = 1;
 	const maxRetries = 5;
 	if (threads > proxies.length) threads = proxies.length;
 	if (!silent) logger.info(`Checking ${chalk.yellow(proxies.length)} proxies... This might take up to ${ms((proxies.length * maxRetries * 15000) / threads, { long: true })}.`);
