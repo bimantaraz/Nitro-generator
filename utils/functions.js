@@ -18,7 +18,7 @@ module.exports = {
 	checkForUpdates: (silent = false) => {
 		if (module.exports.updateAvailable) {
 			if (silent) return;
-			return logger.info(chalk.bold(`An update is available on GitHub (v${module.exports.updateAvailable}) ! https://github.com/Tenclea/YANG`));
+			return logger.info(chalk.bold(`An update is available on GitHub (v${module.exports.updateAvailable}) ! ${chalk.blue('https://github.com/Tenclea/YANG')}`));
 		}
 
 		(async () => {
@@ -31,7 +31,7 @@ module.exports = {
 
 			if (version !== update) {
 				module.exports.updateAvailable = update;
-				if (!silent) return logger.info(chalk.bold(`An update is available on GitHub (v${update})! https://github.com/Tenclea/YANG`));
+				if (!silent) return logger.info(chalk.bold(`An update is available on GitHub (v${module.exports.updateAvailable}) ! ${chalk.blue('https://github.com/Tenclea/YANG')}`));
 			}
 		})();
 	},
