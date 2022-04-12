@@ -71,7 +71,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 
 	const checkCode = async (code, proxy, retries = 0) => {
 		logStats();
-		if (!proxy) { stats.threads--; return; }
+		if (!proxy) { stats.threads > 0 ? stats.threads-- : 0; return; }
 
 		const agent = new ProxyAgent(proxy); agent.timeout = 5000;
 		needle.get(
