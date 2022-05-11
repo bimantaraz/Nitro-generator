@@ -8,7 +8,6 @@ module.exports = async () => {
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=https',
 			'https://cufly.cf/t',
 			'https://openproxylist.xyz/http.txt',
-			'https://paste.wtf/paste.php?download&id=97',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt',
 			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
@@ -27,8 +26,6 @@ module.exports = async () => {
 			'https://cufly.cf/v',
 			'https://openproxylist.xyz/socks4.txt',
 			'https://openproxylist.xyz/socks5.txt',
-			'https://paste.wtf/paste.php?download&id=96',
-			'https://paste.wtf/paste.php?download&id=98',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks4.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks5.txt',
 			'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt',
@@ -45,7 +42,7 @@ module.exports = async () => {
 			const res = await needle('get', s, { response_timeout: 10000, follow_max: 5, rejectUnauthorized: false })
 				.catch(e => logger.error(`Could not scrape proxies from ${s} : ${e}`));
 
-			if (!res.body) return [];
+			if (!res.body || typeof res.body !== 'string') return [];
 			return res.body.split(/\r|\n|<br>/)
 				.filter(p => p !== '')
 				.map(p => t + '://' + p);
