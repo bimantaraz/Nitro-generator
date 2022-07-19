@@ -6,7 +6,6 @@ module.exports = async () => {
 		http: [
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=http',
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=https',
-			'https://cufly.cf/t',
 			'https://openproxylist.xyz/http.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt',
@@ -22,8 +21,6 @@ module.exports = async () => {
 		socks: [
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=socks4',
 			'https://api.proxyscrape.com/?request=displayproxies&status=alive&proxytype=socks5',
-			'https://cufly.cf/u',
-			'https://cufly.cf/v',
 			'https://openproxylist.xyz/socks4.txt',
 			'https://openproxylist.xyz/socks5.txt',
 			'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks4.txt',
