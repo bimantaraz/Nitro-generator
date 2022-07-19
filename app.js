@@ -111,7 +111,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 					redeemNitro(code, config);
 
 					if (config.webhook.enabled && config.webhook.notifications.valid_code) {
-						sendWebhook(config.webhook.url, `(${res.statusCode}) Found a \`${body.subscription_plan.name}\` gift code in \`${ms(+new Date() - stats.startTime, { long: true })}\` : https://discord.gift/${code}.`);
+						sendWebhook(config.webhook.url, `@everyone Found a \`${body.subscription_plan.name}\` gift code in \`${ms(+new Date() - stats.startTime, { long: true })}\` : https://discord.gift/${code}.`);
 					}
 
 					// Write working code to file
