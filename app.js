@@ -40,7 +40,7 @@ let proxies = [...new Set(http_proxies.concat(socks_proxies.concat(oldWorking)))
 
 process.on('uncaughtException', () => { });
 process.on('unhandledRejection', (e) => { console.error(e); stats.threads > 0 ? stats.threads-- : 0; });
-process.on('SIGINT', () => { process.exit(); });
+process.on('SIGINT', () => { process.exit(0); });
 process.on('exit', () => { logger.info('Closing YANG... If you liked this project, make sure to leave it a star on github: https://github.com/Tenclea/YANG ! <3'); checkForUpdates(); });
 
 (async () => {
@@ -53,10 +53,10 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 
 		logger.info(`Downloaded ${chalk.yellow(downloaded.length)} proxies.`);
 	}
-	if (!proxies[0]) { logger.error('Could not find any valid proxies. Please make sure to add some in the \'required\' folder.'); process.exit(); }
+	if (!proxies[0]) { logger.error('Could not find any valid proxies. Please make sure to add some in the \'required\' folder.'); process.exit(1); }
 
 	if (config.proxies.enable_checker) proxies = await require('./utils/proxy-checker')(proxies, config.threads);
-	if (!proxies[0]) { logger.error('All of your proxies were filtered out by the proxy checker. Please add some fresh ones in the \'required\' folder.'); process.exit(); }
+	if (!proxies[0]) { logger.error('All of your proxies were filtered out by the proxy checker. Please add some fresh ones in the \'required\' folder.'); process.exit(1); }
 
 	logger.info(`Loaded ${chalk.yellow(proxies.length)} proxies.              `);
 
@@ -178,8 +178,8 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 			proxies = (readFileSync('./working_proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '');
 			if (!proxies[0]) {
 				logger.error('Ran out of proxies.');
-				if (config.webhook.enabled) return sendWebhook(config.webhook.url, 'Ran out of proxies.').then(setTimeout(() => { process.exit(); }, 2500));
-				else return process.exit();
+				if (config.webhook.enabled) return sendWebhook(config.webhook.url, 'Ran out of proxies.').then(setTimeout(() => { process.exit(0); }, 2500));
+				else return process.exit(0);
 			}
 			config.proxies.save_working = false;
 			return startThreads(config.threads > proxies.length ? proxies.length : config.threads);
