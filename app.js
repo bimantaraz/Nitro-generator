@@ -171,15 +171,15 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 
 	startThreads(threads);
 
-	setInterval(() => {
+	setInterval(async () => {
 		// Close / restart program if all proxies used
 		if (stats.threads === 0) {
 			logger.info('Restarting using working_proxies.txt list.');
 			proxies = (readFileSync('./working_proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '');
 			if (!proxies[0]) {
 				logger.error('Ran out of proxies.');
-				if (config.webhook.enabled) return sendWebhook(config.webhook.url, 'Ran out of proxies.').then(setTimeout(() => { process.exit(0); }, 2500));
-				else return process.exit(0);
+				if (config.webhook.enabled) await sendWebhook(config.webhook.url, 'Ran out of proxies.');
+				return process.exit(0);
 			}
 			config.proxies.save_working = false;
 			return startThreads(config.threads > proxies.length ? proxies.length : config.threads);
