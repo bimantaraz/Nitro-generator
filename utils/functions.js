@@ -36,17 +36,6 @@ module.exports = {
 		})();
 	},
 
-	getCommunityCodes: async (stats) => {
-		const res = await needle(
-			'post',
-			'https://yangdb.tenclea.repl.co/codes',
-			{ codes: stats.used_codes.slice(-10000), version: stats.version },
-			{ json: true, response_timeout: 30000 },
-		).catch(() => { });
-
-		return res?.body?.codes;
-	},
-
 	sendWebhook: (url, message) => {
 		const date = +new Date();
 
