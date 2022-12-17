@@ -9,7 +9,7 @@
   <b>The most efficient nitro generator and checker you'll ever find.</b><br>
   Made with ❤ by <b><a href="https://github.com/tenclea">Tenclea</a></b>
   <br>
-  If you liked this project, please consider <b>starring</b> it <3
+  If you liked this project, please consider <b>starring</b> it :)
 </p>
 
 <h2 align="center">Previews</h2>
@@ -27,14 +27,14 @@
 * **Very fast code generator and checker (2000 attempts/minute)**
 * Fully automated, can generate and check codes infinitely, no need to restart every hour
 * Proxy scrapper and checker
-* Auto nitro-redeem
+* Automatically redeems nitro
 * Download fresh proxies while checking codes
 * Full webhook support
 * Real-time stats
 
 ## Requirements
 
-* [Node.js v16+](https://nodejs.org/en/) (optional if you download the compiled version)
+* [Node.js v16+](https://nodejs.org/en/) (not needed with the compiled version)
 * [A Discord token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token) (optional)
 
 ## Setup
