@@ -209,4 +209,14 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 		startThreads(config.threads - stats.threads);
 		addingProxies = false;
 	}, 60 * 60 * 1000);
+
+	// Webhook status update
+	if (+config.webhook.notifications.status_update_interval != 0) {
+		setInterval(async () => {
+			const attempts = stats.used_codes.length;
+			const aps = attempts / ((+new Date() - stats.startTime) / 1000) * 60 || 0;
+			sendWebhook(config.webhook.url, `Proxies: \`${proxies.length + stats.threads}\` | Attempts: \`${attempts}\` (~\`${aps.toFixed(1)}\`/min) | Working Codes: \`${stats.working}\``);
+			return;
+		}, config.webhook.notifications.status_update_interval * 1000);
+	}
 })();
