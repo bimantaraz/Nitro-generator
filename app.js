@@ -14,9 +14,9 @@ console.clear();
 console.log(chalk.magenta(`
 __  _____________   __________
 _ \\/ /__    |__  | / /_  ____/
-__  /__/ /| |_   |/ /_  / __  
-_/ / _/ ___ |/ /|  / / /_/ /  
-/_/  /_/  |_/_/ |_/  \\____/   
+__  /__/ /| |_   |/ /_  / __
+_/ / _/ ___ |/ /|  / / /_/ /
+/_/  /_/  |_/_/ |_/  \\____/
        ${chalk.italic.gray(`v${stats.version} - by Tenclea`)}
 `));
 
@@ -48,7 +48,8 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 	if (config.proxies.enable_scrapper) {
 		logger.info('Downloading fresh proxies...');
 
-		const downloaded = await require('./utils/proxy-scrapper')();
+		let downloaded = await require('./utils/proxy-scrapper')();
+		downloaded = downloaded.slice(0, +config.proxies.max_proxies_download || downloaded.length);
 		proxies = [...new Set(proxies.concat(downloaded))];
 
 		logger.info(`Downloaded ${chalk.yellow(downloaded.length)} proxies.`);
