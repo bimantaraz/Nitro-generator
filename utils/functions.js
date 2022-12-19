@@ -56,8 +56,8 @@ module.exports = {
 			}
 
 			else if (body.message === 'You are being rate limited.') {
-				logger.warn(chalk.red(`You are being rate limited, trying to claim again in ${chalk.yellow(body.retry_after / 1000)} seconds.`));
-				return setTimeout(() => { module.exports.redeemNitro(code, config); }, body.retry_after + 50);
+				logger.warn(chalk.red(`You are being rate limited, trying to claim again in ${chalk.yellow(body.retry_after)} seconds.`));
+				return setTimeout(() => { module.exports.redeemNitro(code, config); }, body.retry_after * 1000 + 50);
 			}
 			else if (body.message === 'Unknown Gift Code') {
 				return logger.warn(`${chalk.bold(code)} was an invalid gift code or had already been claimed.`);
