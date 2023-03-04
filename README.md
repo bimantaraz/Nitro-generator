@@ -32,21 +32,25 @@
 * Full webhook support
 * Real-time stats
 
-## Requirements
+## Installation
+
+### Requirements
 
 * [Node.js v16+](https://nodejs.org/en/) (not needed with the compiled version)
 * [A Discord token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token) (optional)
 
-## Setup
-
+### Setup
 * Clone this repository to your computer or download a compiled release from the [release page](https://github.com/Tenclea/YANG/releases).
 * Edit the config variables in the `config.yml` file as you like.
 * Paste fresh http(s)/socks proxies into `required/http-proxies.txt`/`required/socks-proxies.txt`.
 * Open up a command prompt in the downloaded folder and type `npm install` to install the requirements (not required for the compiled version).
 * Start the generator by typing `node app.js`, or opening up the executable you downloaded !
 
+## A Few Stats
+![Alt](https://repobeats.axiom.co/api/embed/f37adbf12f39090572fb0229b85481c1c0b19252.svg "Repobeats analytics image")
+
 ## Disclaimer
 
-Everything you can see here has been made for educational purposes and as a proof of concept.  
-I do not promote the usage of my tools, and do not take responsibility for any bad usage of this tool.  
-Stealing codes means stealing money from people and is against Discord's TOS. Don't.
+`Everything you can see here has been made for educational purposes and as a proof of concept.`  
+`I do not promote the usage of my tools, and do not take responsibility for any bad usage of this tool.`  
+`Stealing codes means stealing money from people and is against Discord's TOS. Don't.`
