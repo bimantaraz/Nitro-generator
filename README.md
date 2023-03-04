@@ -22,17 +22,17 @@
    <img src="https://i.imgur.com/4QlDMU9.png" title="YANG - By Tenclea : Main Nitro Codes Generator"/>
 </p>
 
-## Main features
+## ✨ Main features
 
-* **Very fast code generator and checker (2000 attempts/minute)**
-* Fully automated, can generate and check codes infinitely, no need to restart every hour
-* Proxy scrapper and checker
-* Automatically redeems nitro
-* Download fresh proxies while checking codes
-* Full webhook support
-* Real-time stats
+* 🔥 **Very fast code generator and checker (2000 attempts/minute)**
+* 🤖 Fully automated, can generate and check codes infinitely, no need to restart every hour
+* 🌐 Proxy scrapper and checker
+* 💰 Automatically redeems nitro
+* 📥 Download fresh proxies while checking codes
+* 🔔 Full webhook support
+* 📈 Real-time stats
 
-## Installation
+## 💻 Installation
 
 ### Requirements
 
@@ -47,7 +47,7 @@
 * Start the generator by typing `node app.js`, or opening up the executable you downloaded !
 
 ## A Few Stats
-![Alt](https://repobeats.axiom.co/api/embed/f37adbf12f39090572fb0229b85481c1c0b19252.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/13c3726d8a52485e2909772a033ef3ccc013a19f.svg "Repobeats analytics image")
 
 ## Disclaimer
 
