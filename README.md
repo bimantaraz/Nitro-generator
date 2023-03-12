@@ -1,4 +1,4 @@
-<h1 align="center">🔥 YANG: Yet Another Nitro Generator 🐦</h1>
+<h1 align="center">🔥 YANG: Yet Another Nitro Generator 🚀</h1>
 
 <p align="center">
   <a href="https://github.com/Tenclea/YANG/"><img src="https://img.shields.io/github/last-commit/tenclea/yang?style=flat" /></a>
