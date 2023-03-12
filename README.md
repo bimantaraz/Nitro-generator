@@ -1,4 +1,4 @@
-<h1 align="center">YANG: Yet Another Nitro Generator</h1>
+<h1 align="center">🔥 YANG: Yet Another Nitro Generator 🐦</h1>
 
 <p align="center">
   <a href="https://github.com/Tenclea/YANG/"><img src="https://img.shields.io/github/last-commit/tenclea/yang?style=flat" /></a>
@@ -12,7 +12,7 @@
   If you liked this project, please consider <b>starring</b> it :)
 </p>
 
-<h2 align="center">Previews</h2>
+<h2 align="center">👀 Previews</h2>
 
 <p align="center">
    • Proxy Scrapper & Checker : <br>
@@ -46,10 +46,10 @@
 * Open up a command prompt in the downloaded folder and type `npm install` to install the requirements (not required for the compiled version).
 * Start the generator by typing `node app.js`, or opening up the executable you downloaded !
 
-## A Few Stats
+## 📝 A Few Stats
 ![Alt](https://repobeats.axiom.co/api/embed/13c3726d8a52485e2909772a033ef3ccc013a19f.svg "Repobeats analytics image")
 
-## Disclaimer
+## ⚠ Disclaimer
 
 `Everything you can see here has been made for educational purposes and as a proof of concept.`  
 `I do not promote the usage of my tools, and do not take responsibility for any bad usage of this tool.`  
