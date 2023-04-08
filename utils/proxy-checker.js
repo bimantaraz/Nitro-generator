@@ -7,9 +7,9 @@ const
 	ProxyAgent = require('proxy-agent');
 
 module.exports = async (proxies, threads, silent = false) => {
-	const maxRetries = 5;
+	const maxRetries = 2;
 	if (threads > proxies.length) threads = proxies.length;
-	if (!silent) logger.info(`Checking ${chalk.yellow(proxies.length)} proxies... This might take up to ${ms((proxies.length * maxRetries * 15000) / threads, { long: true })}.`);
+	if (!silent) logger.info(`Checking ${chalk.yellow(proxies.length)} proxies... This might take up to ${ms((proxies.length * maxRetries * 10000) / threads, { long: true })}.`);
 
 	let last = +new Date();
 	proxies = await new Promise(complete => {
@@ -34,8 +34,8 @@ module.exports = async (proxies, threads, silent = false) => {
 
 		const log = () => {
 			if (silent) return;
-			let eta = (((proxies.length + threads) * maxRetries * 15000) / threads) - (+new Date() - last);
-			if (!eta || eta < 60_000) eta = 'less than a minute';
+			let eta = (((proxies.length + threads) * maxRetries * 10000) / threads) - (+new Date() - last);
+			if (!eta || eta < 10000) eta = '< 10 seconds';
 			else eta = '~' + ms(eta, { long: true });
 
 			const time = [new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()].map(t => { if (t < 10) { t = '0' + t; } return t; });
