@@ -12,12 +12,11 @@ const stats = { downloaded_codes: [], threads: 0, startTime: 0, used_codes: [], 
 
 console.clear();
 console.log(chalk.magenta(`
-__  _____________   __________
-_ \\/ /__    |__  | / /_  ____/
-__  /__/ /| |_   |/ /_  / __
-_/ / _/ ___ |/ /|  / / /_/ /
-/_/  /_/  |_/_/ |_/  \\____/
-       ${chalk.italic.gray(`v${stats.version} - by Tenclea`)}
+__   __ __  __  _  __
+\\ \`v' //  \\|  \\| |/ _]
+ \`. .'| /\\ | | ' | [/\\
+  !_! |_||_|_|\\__|\\__/
+  ${chalk.italic.gray(`v${stats.version} - by Tenclea`)}
 `));
 
 let config = yaml.load(readFileSync('./config.yml'));
