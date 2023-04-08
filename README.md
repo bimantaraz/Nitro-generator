@@ -32,14 +32,7 @@
 * 🔔 Full webhook support
 * 📈 Real-time stats
 
-## 💻 Installation
-
-### Requirements
-
-* [Node.js v16+](https://nodejs.org/en/) (not needed with the compiled version)
-* [A Discord token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token) (optional)
-
-### Setup
+## 💻 Setup
 * Download a compiled release from the [release page](https://github.com/Tenclea/YANG/releases).
 * Edit the config variables in the `config.yml` file as you like.
 * (Optional) Paste fresh http(s)/socks proxies into `required/http-proxies.txt`/`required/socks-proxies.txt`.
