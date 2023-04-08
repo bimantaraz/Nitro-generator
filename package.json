@@ -20,25 +20,5 @@
 	"bugs": {
 		"url": "https://github.com/Tenclea/YANG/issues"
 	},
-	"homepage": "https://github.com/Tenclea/YANG#readme",
-	"pkg": {
-		"scripts": [
-			"app.js",
-			"utils/*.js",
-			"node_modules/vm2/lib/setup-sandbox.js"
-		],
-		"assets": [
-			"utils/*",
-			"node_modules/node-dpapi2/build/Release/*"
-		],
-		"targets": [
-			"node18-linux-x64",
-			"node18-macos-x64",
-			"node18-win-x64"
-		],
-		"outputPath": "dist"
-	},
-	"bin": {
-		"yang": "app.js"
-	}
+	"homepage": "https://github.com/Tenclea/YANG#readme"
 }
