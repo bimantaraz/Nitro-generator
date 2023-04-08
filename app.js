@@ -25,7 +25,7 @@ watchFile('./config.yml', () => {
 
 	// Updates logger
 	logger.level = config.debug_mode ? 'debug' : 'info';
-	logger.info('Updated the config variables.              ');
+	logger.info('Updated the config variables.');
 
 	if (config.auto_redeem.enabled) checkToken(config.auto_redeem.token);
 	return;
@@ -58,7 +58,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 	if (config.proxies.enable_checker) proxies = await require('./utils/proxy-checker')(proxies, config.threads);
 	if (!proxies[0]) { logger.error('All of your proxies were filtered out by the proxy checker. Please add some fresh ones in the \'required\' folder.'); process.exit(1); }
 
-	logger.info(`Loaded ${chalk.yellow(proxies.length)} proxies.              `);
+	logger.info(`Loaded ${chalk.yellow(proxies.length)} proxies.`);
 
 	const generateCode = () => {
 		const code = Array.apply(0, Array(16)).map(() => {
@@ -135,7 +135,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 					p = proxies.shift();
 				}
 				else if (body.message === 'Unknown Gift Code') {
-					logger.warn(`${code} was an invalid gift code.              `);
+					logger.warn(`${code} was an invalid gift code.`);
 				}
 				else { console.log(body?.message + ' - please report this on GitHub.'); }
 				logStats();

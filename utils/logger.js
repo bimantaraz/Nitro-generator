@@ -16,6 +16,8 @@ module.exports = winston.createLogger({
 		const time = chalk.magenta(times.join(':')) + ' ';
 		const message = ` » ${log.message}`;
 
+		process.stdout.clearLine(); // Fix overlapping
+
 		if (log.level === 'info') return time + chalk.greenBright(`[${log.level.toUpperCase()}] `) + message;
 		else if (log.level === 'warn') return time + chalk.yellow(`[${log.level.toUpperCase()}] `) + message;
 		else if (log.level === 'error') return time + chalk.red(`[${log.level.toUpperCase()}]`) + message;
