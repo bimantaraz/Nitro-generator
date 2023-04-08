@@ -116,10 +116,11 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 					}
 
 					// Write working code to file
-					let codes = existsSync('./validCodes.txt') ? readFileSync('./validCodes.txt', 'UTF-8') : '';
+					let codes = existsSync('./valid_codes.txt') ? readFileSync('./valid_codes.txt', 'utf-8') : '';
+					codes += `${new Date().toLocaleString()}: `;
 					codes += body?.subscription_plan || '???';
-					codes += ` - https://discord.gift/${code}\n=====================================================\n`;
-					writeFileSync('./validCodes.txt', codes);
+					codes += ` - https://discord.gift/${code}\n`;
+					writeFileSync('./valid_codes.txt', codes, 'utf-8');
 
 					stats.working++;
 				}
