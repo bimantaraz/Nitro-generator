@@ -61,7 +61,8 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 	logger.info(`Loaded ${chalk.yellow(proxies.length)} proxies.`);
 
 	const generateCode = () => {
-		const code = Array.apply(0, Array(16)).map(() => {
+		const code_length = { 'short': 16, 'long': 24, 'both': Math.random() > 0.5 ? 16 : 24 }[config.code_length] || 16;
+		const code = Array.apply(0, Array(code_length)).map(() => {
 			return ((charset) => {
 				return charset.charAt(Math.floor(Math.random() * charset.length));
 			})('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');

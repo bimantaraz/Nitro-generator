@@ -1,3 +1,7 @@
+# The length of the codes to generate, can be one of 'short', 'long' or 'both'
+# Short is 16 characters, long is 24, and both will randomly choose between 16 and 24 each time
+code_length: short
+
 # Auto redeems valid nitro codes
 auto_redeem:
   # enable auto_redeem or not (true / false)
@@ -17,10 +21,11 @@ proxies:
   enable_scrapper: true
 
   # The maximum amount of proxies to download (if enabled), use '0' for no maximum.
-  max_proxies_download: 10000
+  max_proxies_download: 1000
 
-# The amount of codes to check at the same time (the higher, the faster, but errors may happen if set too high)
-threads: 100
+# The amount of codes to check at the same time
+# The higher, the faster, but it may slow the generator down if it is set too high
+threads: 50
 
 # Receive webhook messages on start and when a valid code is found
 webhook:
