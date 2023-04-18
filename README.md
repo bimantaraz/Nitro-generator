@@ -32,19 +32,11 @@
 * 🔔 Full webhook support
 * 📈 Real-time stats
 
-## 💻 Installation
-
-### Requirements
-
-* [Node.js v16+](https://nodejs.org/en/) (not needed with the compiled version)
-* [A Discord token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token) (optional)
-
-### Setup
-* Clone this repository to your computer or download a compiled release from the [release page](https://github.com/Tenclea/YANG/releases).
+## 💻 Setup
+* Download a compiled release from the [release page](https://github.com/Tenclea/YANG/releases).
 * Edit the config variables in the `config.yml` file as you like.
-* Paste fresh http(s)/socks proxies into `required/http-proxies.txt`/`required/socks-proxies.txt`.
-* Open up a command prompt in the downloaded folder and type `npm install` to install the requirements (not required for the compiled version).
-* Start the generator by typing `node app.js`, or opening up the executable you downloaded !
+* (Optional) Paste fresh http(s)/socks proxies into `required/http-proxies.txt`/`required/socks-proxies.txt`.
+* Start the generator by opening up the executable you downloaded !
 
 ## 📝 A Few Stats
 ![Alt](https://repobeats.axiom.co/api/embed/13c3726d8a52485e2909772a033ef3ccc013a19f.svg "Repobeats analytics image")
