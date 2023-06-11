@@ -1,4 +1,5 @@
 const chalk = require('chalk'),
+	{ existsSync, readFileSync } = require('fs'),
 	logger = require('./logger'),
 	ms = require('ms'),
 	needle = require('needle');
@@ -34,6 +35,19 @@ module.exports = {
 				if (!silent) return logger.info(chalk.bold(`An update is available on GitHub (v${module.exports.updateAvailable}) ! ${chalk.blue('https://github.com/Tenclea/YANG')}`));
 			}
 		})();
+	},
+
+	loadProxies: (path, type = null) => {
+		if (!existsSync(path)) return [];
+		return readFileSync(path, 'utf-8')
+			.split(/\r?\n/)
+			.filter(p => p)
+			.map(p => {
+				const parts = p.split(':');
+				if (parts.length > 3) p = parts.slice(2).join(':') + '@' + parts.slice(0, 2).join(':');
+
+				return (type || '') + p;
+			});
 	},
 
 	sendWebhook: (url, message) => {

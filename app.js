@@ -3,7 +3,7 @@ const
 	logger = require('./utils/logger'),
 	ms = require('ms'),
 	needle = require('needle'),
-	{ checkToken, checkForUpdates, redeemNitro, sendWebhook } = require('./utils/functions'),
+	{ checkToken, checkForUpdates, loadProxies, redeemNitro, sendWebhook } = require('./utils/functions'),
 	{ existsSync, readFileSync, watchFile, writeFileSync } = require('fs'),
 	ProxyAgent = require('proxy-agent'),
 	yaml = require('js-yaml');
@@ -32,10 +32,11 @@ watchFile('./config.yml', () => {
 });
 
 /* Load proxies, working proxies and removes duplicates */
-const http_proxies = existsSync('./required/http-proxies.txt') ? (readFileSync('./required/http-proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '').map(p => 'http://' + p) : [];
-const socks_proxies = existsSync('./required/socks-proxies.txt') ? (readFileSync('./required/socks-proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '').map(p => 'socks://' + p) : [];
-const oldWorking = existsSync('./working_proxies.txt') ? (readFileSync('./working_proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '') : [];
-let proxies = [...new Set(http_proxies.concat(socks_proxies.concat(oldWorking)))];
+const http_proxies = loadProxies('./required/http-proxies.txt', 'http');
+const socks_proxies = loadProxies('./required/socks-proxies.txt', 'socks');
+const oldWorking = loadProxies('./working_proxies.txt');
+
+let proxies = [...new Set(http_proxies.concat(socks_proxies, oldWorking))];
 
 process.on('uncaughtException', () => { });
 process.on('unhandledRejection', (e) => { console.error(e); stats.threads > 0 ? stats.threads-- : 0; });
@@ -177,7 +178,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 		// Close / restart program if all proxies used
 		if (stats.threads === 0) {
 			logger.info('Restarting using working_proxies.txt list.');
-			proxies = (readFileSync('./working_proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '');
+			proxies = loadProxies('./working_proxies.txt');
 			if (!proxies[0]) {
 				logger.error('Ran out of proxies.');
 				if (config.webhook.enabled) await sendWebhook(config.webhook.url, 'Ran out of proxies.');
@@ -195,15 +196,16 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 	setInterval(async () => {
 		checkForUpdates(true);
 		if (addingProxies || !config.proxies.enable_scrapper) return;
-		else addingProxies = true;
+		addingProxies = true;
 
 		logger.info('Downloading updated proxies.');
 
-		const new_http_proxies = existsSync('./required/http-proxies.txt') ? (readFileSync('./required/http-proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '').map(p => 'http://' + p) : [];
-		const new_socks_proxies = existsSync('./required/socks-proxies.txt') ? (readFileSync('./required/socks-proxies.txt', 'UTF-8')).split(/\r?\n/).filter(p => p !== '').map(p => 'socks://' + p) : [];
+		const new_http_proxies = loadProxies('./required/http-proxies.txt', 'http');
+		const new_socks_proxies = loadProxies('./required/socks-proxies.txt', 'socks');
+		const newProxies = [...new Set(new_http_proxies.concat(new_socks_proxies, await require('./utils/proxy-scrapper')()))];
 
-		const newProxies = new_http_proxies.concat(new_socks_proxies.concat(await require('./utils/proxy-scrapper')())).filter(p => !working_proxies.includes(p));
 		const checked = await require('./utils/proxy-checker')(newProxies, config.threads, true);
+
 		proxies = proxies.concat(checked);
 
 		logger.info(`Added ${checked.length} proxies.`);
