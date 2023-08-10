@@ -90,11 +90,11 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 					let timeout = 0;
 					if (retries < 100) {
 						retries++; timeout = 2500;
-						logger.debug(`Connection to ${chalk.grey(proxy)} failed : ${chalk.red(res?.statusCode || 'INVALID RESPONSE')}.`);
+						logger.debug(`Connection to ${chalk.grey(proxy)} failed : ${chalk.red(res?.statusCode || err.message || 'INVALID RESPONSE')}.`);
 					}
 					else {
 						// proxies.push(proxy); // don't remove proxy
-						logger.debug(`Removed ${chalk.gray(proxy)} : ${chalk.red(res?.statusCode || 'INVALID RESPONSE')}`);
+						logger.debug(`Removed ${chalk.gray(proxy)} : ${chalk.red(res?.statusCode || err.message || 'INVALID RESPONSE')}`);
 						proxy = proxies.shift();
 					}
 
