@@ -44,7 +44,7 @@ module.exports = {
 			.filter(p => p)
 			.map(p => {
 				const parts = p.split(':');
-				if (parts.length > 3) p = parts.slice(2).join(':') + '@' + parts.slice(0, 2).join(':');
+				if (parts.length > 3 && !p.includes('://')) p = parts.slice(2).join(':') + '@' + parts.slice(0, 2).join(':');
 
 				return (type ? `${type}://` : '') + p;
 			});
