@@ -39,7 +39,7 @@ module.exports = async (proxies, threads, silent = false) => {
 			else eta = '~' + ms(eta, { long: true });
 
 			const time = [new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()].map(t => { if (t < 10) { t = '0' + t; } return t; });
-			process.stdout.write(`${chalk.magenta(time.join(':'))} ${chalk.greenBright('[INFO]')}  » Proxies left: ${proxies.length + threads} | Working: ${checked.length} | Time left: ${eta}      \r`);
+			process.stdout.write(`${chalk.magenta(time.join(':'))} ${chalk.greenBright('[INFO]')} » Proxies left: ${proxies.length + threads} | Working: ${checked.length} | Time left: ${eta}      \r`);
 			process.title = `Checking proxies... | Proxies left: ${proxies.length + threads} | Working: ${checked.length} | Time left: ${eta}`;
 			return;
 		};
