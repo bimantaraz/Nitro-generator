@@ -1,7 +1,7 @@
 {
 	"name": "yang",
 	"version": "3.3.1",
-	"description": "**The most efficient nitro generator and checker you'll ever find.**  \r Made with ❤ by **Tenclea**.",
+	"description": "**The most efficient nitro generator and checker you'll ever find.** \nMade with ❤ by **Tenclea**.",
 	"main": "app.js",
 	"author": "Tenclea",
 	"license": "ISC",
