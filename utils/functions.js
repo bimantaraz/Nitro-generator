@@ -46,7 +46,7 @@ module.exports = {
 				const parts = p.split(':');
 				if (parts.length > 3) p = parts.slice(2).join(':') + '@' + parts.slice(0, 2).join(':');
 
-				return (`${type}://` || '') + p;
+				return (type ? `${type}://` : '') + p;
 			});
 	},
 
