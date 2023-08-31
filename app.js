@@ -11,12 +11,14 @@ const
 const stats = { downloaded_codes: [], threads: 0, startTime: 0, used_codes: [], version: require('./package.json').version, working: 0 };
 
 console.clear();
-console.log(chalk.magenta(`\u001B[?25l
-__   __ __  __  _  __
-\\ \`v' //  \\|  \\| |/ _]
- \`. .'| /\\ | | ' | [/\\
-  !_! |_||_|_|\\__|\\__/
-  ${chalk.italic.gray(`v${stats.version} - by Tenclea`)}
+console.log(chalk.blue(`\u001B[?25l                                                 
+██╗   ██╗ █████╗ ███╗   ██╗ ██████╗ 
+╚██╗ ██╔╝██╔══██╗████╗  ██║██╔════╝ 
+ ╚████╔╝ ███████║██╔██╗ ██║██║  ███╗
+  ╚██╔╝  ██╔══██║██║╚██╗██║██║   ██║
+   ██║   ██║  ██║██║ ╚████║╚██████╔╝
+   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ 
+               ${chalk.italic.gray(`v${stats.version} - by Tenclea`)}
 `));
 
 let config = yaml.load(readFileSync('./config.yml'));
