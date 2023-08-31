@@ -11,7 +11,7 @@ const
 const stats = { downloaded_codes: [], threads: 0, startTime: 0, used_codes: [], version: require('./package.json').version, working: 0 };
 
 console.clear();
-console.log(chalk.magenta(`
+console.log(chalk.magenta(`\u001B[?25l
 __   __ __  __  _  __
 \\ \`v' //  \\|  \\| |/ _]
  \`. .'| /\\ | | ' | [/\\
