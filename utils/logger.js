@@ -62,14 +62,14 @@ webhook:
 
   # Webhook notifications settings
   notifications:
-  # Send a notification when the generator starts (true / false)
-  boot: true
+    # Send a notification when the generator starts (true / false)
+    boot: true
 
-  # Send a notification when a valid code is found (true / false)
-  valid_code: true
+    # Send a notification when a valid code is found (true / false)
+    valid_code: true
 
-  # How often to send status updates to the webhook in seconds (use '0' for never)
-  status_update_interval: 600
+    # How often to send status updates to the webhook in seconds (use '0' for never)
+    status_update_interval: 600
 
 # Print additional information in the console (true / false)
 debug_mode: false`;
