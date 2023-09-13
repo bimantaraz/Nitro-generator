@@ -1,15 +1,17 @@
 <h1 align="center">🔥 YANG: Yet Another Nitro Generator 🚀</h1>
 
 <p align="center">
-  <a href="https://github.com/Tenclea/YANG/releases"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FTenclea%2FYANG%2Fmain%2Fpackage.json&query=%24.version&prefix=v&label=version&color=orange&cacheSeconds=60"/></a>
+  <a href="https://github.com/Tenclea/YANG//"><img src="https://img.shields.io/github/languages/code-size/Tenclea/YANG?color=green&cacheSeconds=300"/></a>
   <a href="https://github.com/Tenclea/YANG"><img src="https://visitor-badge.laobi.icu/badge?page_id=tenclea.YANG"/></a>
-  <a href="https://github.com/Tenclea/YANG/releases/"><img src="https://shields.io/github/downloads/tenclea/YANG/total?label=downloads&logoColor=Green&color=Blue&style=flat"/></a>
+  <a href="https://github.com/Tenclea/YANG/releases/"><img src="https://shields.io/github/downloads/tenclea/YANG/total?label=downloads&color=yellow&style=flat&cacheSeconds=300"/></a>
+  <a href="https://github.com/Tenclea/YANG/releases"><img src="https://img.shields.io/github/v/release/Tenclea/YANG?label=version&color=orange&cacheSeconds=300"/></a>
 
   <br>
-  <b>The most efficient nitro generator and checker you'll ever find.</b><br>
-  Made with ❤ by <b><a href="https://github.com/tenclea">Tenclea</a></b>
+  <b>The most efficient nitro generator and checker you'll ever find.</b>
   <br>
   If you liked this project, please consider <b>starring</b> it :)
+  <br>
+  Made with ❤ by <b><a href="https://github.com/tenclea">Tenclea</a></b>
 </p>
 
 <h2 align="center">👀 Previews</h2>
