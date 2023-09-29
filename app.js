@@ -74,7 +74,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 	};
 
 	const checkCode = async (code, proxy, retries = 0) => {
-		logStats();
+
 		if (!proxy) { stats.threads > 0 ? stats.threads-- : 0; return; }
 
 		const agent = new ProxyAgent(proxy); agent.timeout = 5000;
@@ -100,7 +100,7 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 						proxy = proxies.shift();
 					}
 
-					logStats();
+			
 					return setTimeout(() => { checkCode(generateCode(), proxy, retries); }, timeout);
 				}
 
@@ -143,18 +143,9 @@ process.on('exit', () => { logger.info('Closing YANG... If you liked this projec
 					logger.warn(`${code} was an invalid gift code.`);
 				}
 				else { console.log(body?.message + ' - please report this on GitHub.'); }
-				logStats();
+		
 				return setTimeout(() => { checkCode(generateCode(), p); }, p === proxy ? (body.retry_after * 1000 || 1000) : 0);
 			});
-	};
-
-	const logStats = () => {
-		// Update title and write stats to stdout
-		const attempts = stats.used_codes.length;
-		const aps = attempts / ((+new Date() - stats.startTime) / 1000) * 60 || 0;
-		process.stdout.write(`Proxies: ${chalk.yellow(proxies.length + stats.threads)} | Attempts: ${chalk.yellow(attempts)} (~${chalk.gray(aps.toFixed(0))}/min) | Working Codes: ${chalk.green(stats.working)}  \r`);
-		process.title = `YANG - by Tenclea | Proxies: ${proxies.length + stats.threads} | Attempts: ${attempts} (~${aps.toFixed(0)}/min) | Working Codes: ${stats.working}`;
-		return;
 	};
 
 	const threads = config.threads > proxies.length ? proxies.length : config.threads;

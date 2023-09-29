@@ -1,4 +1,4 @@
-<h1 align="center">🔥 YANG: Yet Another Nitro Generator 🚀</h1>
+<h1 align="center">🔥 YANG: Yet Another Nitro Generator for server farm arm64 🚀</h1>
 <p align="center">
   <b>The most efficient nitro generator and checker you'll ever find.</b><br><br>
   <a href="https://github.com/Tenclea/YANG//"><img src="https://img.shields.io/github/languages/code-size/Tenclea/YANG?color=green&cacheSeconds=300"/></a>

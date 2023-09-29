@@ -16,7 +16,6 @@ const logger = winston.createLogger({
 		const color = colors[log.level] || chalk.reset;
 		const time = [date.getHours(), date.getMinutes(), date.getSeconds()].map(t => t >= 10 ? t : '0' + t).join(':');
 
-		process.stdout.clearLine(); // Fix overlapping
 		return `${chalk.magenta(time)} ${color(`[${log.level.toUpperCase()}]`)} » ${log.message}`;
 	}),
 	level: debug_mode ? 'debug' : 'info',
